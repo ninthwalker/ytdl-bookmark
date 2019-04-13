@@ -1,4 +1,4 @@
-FROM linuxsever/nginx
+FROM linuxserver/nginx
 MAINTAINER ninthwalker
 
 ENV UPDATED_ON 12APR2019
