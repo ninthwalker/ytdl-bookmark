@@ -5,7 +5,7 @@ $url = $_REQUEST['v'];
 
 # date used for log
 $date = date("h:i:s");
-$log = "$url-$date.log"
+$log = "/downloads/logs/$url-$date.log"
 
 # Run youtube-dl command in background and output to log
 shell_exec("$cmd &> $log &");
