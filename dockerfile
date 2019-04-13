@@ -5,13 +5,12 @@ ENV UPDATED_ON 12APR2019
 ENV NOWSHOWING_VERSION 1.0.0
 
 VOLUME /downloads
-EXPOSE 6523
 
 #copy app files
 COPY root/ /
 
 # Install permanent packages
-RUN apk --update --no-cache add python2 && \
+RUN apk --update --no-cache add python2 ffmpeg && \
 # Install temporary build dependencies
 apk add --no-cache --virtual build-dependencies \
 py-pip && \
