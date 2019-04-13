@@ -1,0 +1,35 @@
+#!/usr/bin/with-contenv sh
+
+# current version
+this_version=1.0.0
+
+# get version
+if [ -f /config/cfg/version ]; then
+  their_version=$(cat /config/cfg/version)
+else
+  echo "version not detected."
+fi
+
+#Copies config files and creates advanced config file if not present
+if [ -f /config/cfg/youtube-dl.conf ]; then
+  echo "youtube-dl.conf file detected. Checking version .."
+  if [ $their_version = $this_version ]; then
+    # do nothing, latest version
+	echo "Latest $this_version release found. Nothing to update."
+  elif [ $their_version != $this_version ]; then
+    # copy files since last version
+	echo "Version $their_version found."
+	echo "Backing up files to /config/backup/ & upgrading to $this_version release."
+	mkdir -p /config/backup && chmod 775 /config/backup
+	cp -Rfp /config/cfg/ /config/www/ /config/backup/
+	cp -Rfp /opt/config/www /opt/config/cfg /config/
+	chown xyz:xyz -R /config/backup/
+  fi
+  
+else
+  # copy files incl advanced.yaml
+  echo "New Install detected. Installing $this_version release .."
+  cp -Rfp /opt/config/. /config/
+fi
+
+echo "Please see instructions at http://hostIP:hostPort/help"

@@ -1,0 +1,21 @@
+#!/usr/bin/with-contenv sh
+
+PUID=${PUID:-99}
+PGID=${PGID:-100}
+
+groupmod -o -g "$PGID" xyz
+usermod -o -u "$PUID" xyz
+chown -R xyz:xyz /opt /run/lighttpd
+echo "
+-----------------------------------------
+             YTDL-BOOKMARK
+-----------------------------------------
+          Brought to you by:
+          
+			 Ninthwalker
+
+-----------------------------------------
+User xyz set to:  $(id -u xyz)
+Group xyz set to:  $(id -g xyz)
+-----------------------------------------
+"     

@@ -1,26 +1,35 @@
-FROM linuxserver/nginx
+FROM alpine:3.9
 MAINTAINER ninthwalker
 
-ENV UPDATED_ON 12APR2019
-ENV NOWSHOWING_VERSION 1.0.0
+ENV UPDATED_ON 13APR2019
+ENV VERSION 1.0.0
 
-VOLUME /downloads
+VOLUME /config
+EXPOSE 6754
 
-#copy app files
-COPY root/ /opt
+#copy app and s6-overlay files
+COPY root/ s6-overlay/ /
 
 # Install permanent packages
-RUN apk --update --no-cache add python2 ffmpeg && \
+RUN apk add --no-cache lighttpd php7-cgi busybox-suid ca-certificates tzdata shadow python2 ffmpeg && \
+
 # Install temporary build dependencies
 apk add --no-cache --virtual build-dependencies \
 py-pip && \
-# Install latest youtube-dl binary
-pip install --upgrade youtube_dl && \
-# Create log dir
-mkdir /config/log/youtube-dl && \
-# copy over files and remove default index.html
-cp /opt/config/www/index.php /config/www/index.php && \
-cp /opt/config/youtube-dl.conf /config/youtube-dl.conf && \
-rm /config/www/index.html && \
+
+# Create default user & lighttpd path
+groupmod -g 1000 users && \
+useradd -u 99 -U -d /config -s /bin/false xyz && \
+groupmod -o -g 100 xyz && \
+usermod -G users xyz && \
+mkdir /run/lighttpd && \
+
+# Insall latest youtube-dl
+pip install --upgrade youtube-dl && \
+
 # Remove temp files
 apk del --purge build-dependencies
+
+# Start s6 init & webserver
+ENTRYPOINT ["/init"]
+CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]

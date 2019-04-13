@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_blank">
+  <meta charset="utf-8">
+  <title>Now Showing</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <!-- ver1.3 -->
+
+   <!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+</script>
+<![endif]-->
+  
+  <!-- Place your favicon.ico and apple-touch-icon.png in the template root directory -->
+  <link href="img/favicon.ico" rel="shortcut icon">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet"> 
+  
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate-css/animate.min.css" rel="stylesheet">
+  
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+  </head>
+
+<body>
+<!-- Not using preloader or admin link anymore -->
+<!-- Below loads the preload icon -->
+<!-- <div id="preloader"></div> -->
+<!-- <span style="position:absolute;top:0pt;right:0pt;color:#111"><a class="admin" href="../admin/" style="color:#111;" target="_self">Admin</a></span> -->
+
+<!-- Modal -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="YoutubeModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      
+      <div class="modal-body">
+
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>        
+        <!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always">></iframe>
+</div>
+        
+        
+      </div>
+
+    </div>
+  </div>
+</div> 
+
+<!--==========================
+  Hero Section
+============================-->
+  <section id="hero">
+    <div class="hero-container">
+      <div class="wow fadeIn">
+        <div class="hero-logo">
+<!-- enter welcome section image below -->
+          <img src="img/nowshowing.png" alt="Now Showing">
+        </div>
+        
+        <h1>Updated April 12, 2019 </h1>
+        <h2>Just added: <span class="rotating">Laughs,Screams,Thrills,Entertainment</span></h2>
+        <div class="actions">
+          <a href="#movies" class="btn-services">New Movies</a>
+          <a href="#episodes" class="btn-services">New Episodes</a>
+          <a href="#seasons" class="btn-services">New Seasons</a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  
+<!--==========================
+  Header Section
+============================-->
+  <header id="header">
+    <div class="container">
+    
+<!-- Insert link to logo below -->
+      <div id="logo" class="pull-left">
+        <a href="#hero"><img src="img/logo.png" alt="PLEX"></a>
+        <!-- Uncomment below if you prefer to use text -->
+        <!--<h1><a href="#hero">Header 1</a></h1>-->
+      </div>
+        
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#hero">Home</a></li>
+          <li><a href="#movies">New Movies</a></li>
+          <li><a href="#episodes">New Episodes</a></li>
+          <li><a href="#seasons">New Seasons</a></li>
+
+   
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+    
+	
+<!--==========================
+  Statistics Section
+============================-->
+<section id="stats" class="stats">
+<!-- Start Statistics -->
+
+
+  
+<div class="container wow fadeInUp">
+      
+  <div class="row row-center">
+  
+	<div class="col-md-12">
+    
+<!-- header of Statistics section -->
+<br>
+<h5 class="section-title">Fun Friday Stats</h5>
+          
+<div class="section-title-divider"></div>
+
+<!--  table layout start -->
+
+
+<table class="stats" style="border-collapse:collapse;border-spacing:0;border-style:none;width:60%;table-layout:fixed;" cellpadding="5px" align="center">
+							  
+							    <tr>
+								  <td class="tg-yw4l"  align="right"><b>Most watched movie:</b></td>
+								  <td class="tg-yw3l">&nbsp;</td>
+								  <td class="tg-yw4la">Aquaman</td>
+							    </tr>
+							  
+							  
+							    <tr>
+								  <td class="tg-yw51" align="right"><b>Most watched TV show:</b></td>
+								  <td class="tg-yw3l">&nbsp;</td>
+								  <td class="tg-yw51a">Mom</td>
+							    </tr>
+							  
+							  
+							  
+							    <tr>
+								  <td class="tg-yw51" align="right"><b>Most popular day to watch movies:</b></td>
+								  <td class="tg-yw3l">&nbsp;</td>
+								  <td class="tg-yw51a">Friday</td>
+						        </tr>
+							  
+							  
+							    <tr>
+								  <td class="tg-yw4l" align="right"><b>Most popular time to watch movies:</b></td>
+								  <td class="tg-yw3l">&nbsp;</td>
+							      <td class="tg-yw41a" >4:00 PM</td>
+							    </tr>
+							  
+							  
+							  <tr>
+								<td class="tg-yw5l" align="right"><b>Most popular day to watch TV:</b></td>
+								<td class="tg-yw3l">&nbsp;</td>
+								<td class="tg-yw51a">Wednesday</td>
+							  </tr>
+							  
+							  
+							    <tr>
+								  <td class="tg-yw4l" align="right"><b>Most popular time to watch TV:</b></td>
+								  <td class="tg-yw3l">&nbsp;</td>
+								  <td class="tg-yw41a">9:00 PM</td>
+							    </tr>
+							  
+							  
+							    <tr>
+								  <td class="tg-yw5l" align="right"><b>Top user watched:</b></td>
+								  <td class="tg-yw3l">&nbsp;</td>
+								  <td class="tg-yw51a">48 Hours & 12 Min's</td>
+							    </tr>
+							  
+							  
+							    <tr>
+								  <td class="tg-yw4l" align="right"><b>Most concurrent streams:</b></td>
+								  <td class="tg-yw3l">&nbsp;</td>
+								  <td class="tg-yw41a">5</td>
+							    </tr>
+							  
+							  
+							  
+							    <tr>
+								  <td class="tg-yw51b" colspan="3"><center><b>Total Movies:&nbsp;&nbsp;<font color="#e5a00d">3042</font>&nbsp;&nbsp;|&nbsp;&nbsp;Total TV Shows:&nbsp;&nbsp;<font color="#e5a00d">680</font> 
+								  
+								  &nbsp;&nbsp;|&nbsp;&nbsp;Total Songs:&nbsp;&nbsp;<font color="#e5a00d">8897</font>
+								  
+							    </b></center></td></tr>
+							  	    
+						</table>
+
+<!--  table layout end -->
+
+
+<!--  Grid layout start -->
+
+<!--  Grid layout end -->
+
+<!-- Place text below between P tag for text under section header -->           
+<p class="section-description"></p>
+      
+  </div>
+ 
+
+
+</div>
+
+</div>
+
+</section>
+
+<!--==========================
+  Movie Section
+============================-->
+ <section id="movies" class="movies">
+<!-- start of new movies -->
+
+
+  
+<div class="container wow fadeInUp">
+      
+  <div class="row row-center">
+        
+    <div class="col-md-12">
+    
+<!-- header of New Movies section -->
+<br>
+<h5 class="section-title">New Movies</h5>
+          
+<div class="section-title-divider"></div>
+
+<!-- Place text below between P tag for text under section header -->           
+<p class="section-description">  </p>
+        
+     </div>
+      
+  </div>
+     
+<div class="row row-center">
+
+<!-- start loop here -->
+
+ 
+
+  <div class="col-md-3 col-center">
+      <div class="portfolio-item" style="background-image: url(https://image.tmdb.org/t/p/w154/hPZ2caow1PCND6qnerfgn6RTXdm.jpg);">
+    
+    <div class="details">
+              <h4>The Upside (2017)</h4>
+		      <h5 class="bold"></h5>
+              <span class="limittext">Phillip is a wealthy quadriplegic who needs a caretaker to help him with his day-to-day routine in his New York penthouse. He decides to hire Dell, a struggling parolee who's trying to reconnect with his ex and his young son. Despite coming from two different worlds, an unlikely friendship starts to blossom.</span><br>
+			  <span><a href="https://www.imdb.com/title/tt1987680"><img src="img/imdb.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			  <button type="submit" class="video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/EWw7rCHcduQ" data-target="#myModal">
+			  <img src="img/youtube.png"></button>
+			  </span>
+              
+    </div>
+    
+      </div>
+</div> 
+
+</div>
+
+
+</div> 
+
+</section>
+
+<!--==========================
+  New TV Shows Section
+============================-->
+ <section id="episodes" class="movies">
+<!-- start new episodes here -->						
+
+
+</div> 
+
+</section>
+
+
+
+
+<!--==========================
+  New TV Seasons Section
+============================-->
+ <section id="seasons" class="movies">
+<!-- start New seasons -->
+
+
+
+</div> 
+
+</section>
+
+    
+<!--==========================
+  Footer
+============================--> 
+  <footer id="footer">
+      <div class="container">
+        <div class="row row-center">
+          <div class="col-md-12">
+            <div class="copyright">
+              Thanks for watching!
+            </div>
+            <div class="credits">
+			    <br>
+			     Art, summaries, and metadata provided by themoviedb.org and thetvdb.com<br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+  </footer>
+  
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    
+  <!-- Required JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+  <script src="lib/morphext/morphext.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/stickyjs/sticky.js"></script>
+  <script src="lib/easing/easing.js"></script>
+  
+  <!-- Template Specisifc Custom Javascript File -->
+  <script src="js/custom.js"></script>
+  
+    
+</body>
+</html>
