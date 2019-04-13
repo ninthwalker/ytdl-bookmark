@@ -10,3 +10,4 @@ It's a docker with Youtube-dl to be used with a Browser bookmark for easy simple
 This isn't a GUI.
 The idea is to make things fast and simple.  
 You are on a youtube page and want the video/music. So you just click your bookmark, and bam! It's downloaded.  
+So stop useing those sketchy online youtube download sites and run your own!
