@@ -12,6 +12,11 @@ s6-envdir -I /var/run/s6/env-stage2
 backtick -D 0 -n S6_BEHAVIOUR_IF_STAGE2_FAILS { printcontenv S6_BEHAVIOUR_IF_STAGE2_FAILS }
 importas -u S6_BEHAVIOUR_IF_STAGE2_FAILS S6_BEHAVIOUR_IF_STAGE2_FAILS
 
+# This env determines whether user provided files in /etc should be linked 
+# or copied into /var/run/s6
+backtick -D 0 -n S6_READ_ONLY_ROOT { printcontenv S6_READ_ONLY_ROOT }
+importas -u S6_READ_ONLY_ROOT S6_READ_ONLY_ROOT
+
 foreground
 {
   if
@@ -44,7 +49,10 @@ foreground
           if { s6-test -d ${S6_RUNTIME_PROFILE_SRC}/${i} }
           # although s6-hiercopy is prefered, and until it doesn't support 'follow symlinks'
           # option, there is no clean way to allow symlinks between user provided runcoms.
-          if { s6-ln -s ${S6_RUNTIME_PROFILE_SRC}/${i} /var/run/s6/etc/${i} }
+          ifelse { s6-test ${S6_READ_ONLY_ROOT} -eq 0 } { 
+            s6-ln -s ${S6_RUNTIME_PROFILE_SRC}/${i} /var/run/s6/etc/${i} 
+          }
+          if { s6-hiercopy ${S6_RUNTIME_PROFILE_SRC}/${i} /var/run/s6/etc/${i} }
         }
         importas -u ? ?
         if { s6-echo -- "exited ${?}." }
@@ -142,56 +150,71 @@ foreground
           importas -u S6_CMD_WAIT_FOR_SERVICES_MAXTIME S6_CMD_WAIT_FOR_SERVICES_MAXTIME
 
           if -t { if { s6-test ${S6_CMD_WAIT_FOR_SERVICES} -ne 0 } s6-test $# -ne 0 }
-          if
+          s6-maximumtime -t ${S6_CMD_WAIT_FOR_SERVICES_MAXTIME}
+          pipeline { s6-ls -0 -- /var/run/s6/etc/services.d }
+          forstdin -0 -o 0 -- i
+          importas -u i i
+          ifelse { s6-test -f /var/run/s6/services/${i}/down } { exit 0 }
+          ifelse { s6-test -f /var/run/s6/services/${i}/notification-fd }
           {
-            pipeline { s6-ls -0 -- /var/run/s6/etc/services.d }
-            forstdin -0 -p -- i
-            importas -u i i
-            ifelse { s6-test -f /var/run/s6/services/${i}/notification-fd }
-            {
-              s6-svwait -t ${S6_CMD_WAIT_FOR_SERVICES_MAXTIME} -U /var/run/s6/services/${i}
-            }
-            s6-svwait -t ${S6_CMD_WAIT_FOR_SERVICES_MAXTIME} -u /var/run/s6/services/${i}
+            s6-svwait -t ${S6_CMD_WAIT_FOR_SERVICES_MAXTIME} -U /var/run/s6/services/${i}
           }
+          s6-svwait -t ${S6_CMD_WAIT_FOR_SERVICES_MAXTIME} -u /var/run/s6/services/${i}
         }
         if { s6-echo -- "[services.d] done." }
       }
     }
     importas -u ? ?
     ifelse { s6-test ${S6_BEHAVIOUR_IF_STAGE2_FAILS} -eq 0 } { exit 0 }
+
+    # Make stage2 exit code available in stage3
+    foreground { redirfd -w 1 /var/run/s6/env-stage3/S6_STAGE2_EXITED s6-echo -n -- "${?}" }
     exit ${?}
   }
 
 
   ##
-  ## The init is complete. If the user has given a CMD, run it now, then
+  ## The init is complete, If the user has a given CMD, run it now, then
   ## kill everything when it exits.
   ##
 
   if -t { s6-test $# -ne 0 }
-  foreground { s6-setsid -gq -- with-contenv $@ }
+
+  foreground {
+      s6-setsid -gq -- with-contenv
+      backtick -D 0 -n S6_LOGGING { printcontenv S6_LOGGING }
+      importas S6_LOGGING S6_LOGGING
+      ifelse { s6-test ${S6_LOGGING} -eq 2 }
+      {
+          redirfd -w 1 /var/run/s6/uncaught-logs-fifo
+          fdmove -c 2 1
+          $@
+      }
+      $@
+  }
+
   importas -u ? ?
-  if { s6-echo -- "${1} exited ${?}" }
+
+  foreground {
+      /etc/s6/init/init-stage2-redirfd
+      s6-echo -- "[cmd] ${1} exited ${?}"
+  }
 
   # Make CMD exit code available in stage3
-  foreground { redirfd -w 1 /var/run/s6/env-stage3/S6_CMD_EXITED s6-echo -n -- "${?}" }
+  foreground { redirfd -w 1 /var/run/s6/env-stage3/S6_STAGE2_EXITED s6-echo -n -- "${?}" }
 
   # Stop supervision tree
   foreground { s6-svscanctl -t /var/run/s6/services }
 
-  # Race condition here, but it's ok: the sync in stage 3 takes ages,
-  # and if we get killed by the SIGTERM instead of the SIGKILL, meh, who cares.
-
   # Wait to be nuked
   s6-pause -th
+
 }
 importas -u ? ?
 if { s6-test ${?} -ne 0 }
 if { s6-test ${S6_BEHAVIOUR_IF_STAGE2_FAILS} -ne 0 }
 ifelse { s6-test ${S6_BEHAVIOUR_IF_STAGE2_FAILS} -ne 1 }
 {
-  # Stop supervision tree (if it wasn't already due to CMD execution)
-  if { s6-test ! -f /var/run/s6/env-stage3/S6_CMD_EXITED }
   s6-svscanctl -t /var/run/s6/services
 }
 s6-echo -- "\n!!!!!\n init-stage2 failed.\n!!!!!"
