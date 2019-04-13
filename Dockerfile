@@ -19,10 +19,9 @@ py-pip && \
 # Create default user & lighttpd path
 groupmod -g 1000 users && \
 useradd -u 99 -U -d /config -s /bin/false xyz && \
-useradd -u 99 -U -d /downloads -s /bin/false xyz && \
 groupmod -o -g 100 xyz && \
 usermod -G users xyz && \
-mkdir /run/lighttpd && \
+mkdir /run/lighttpd /var/mail && \
 # Insall latest youtube-dl
 pip install --upgrade youtube-dl && \
 # Remove temp files
