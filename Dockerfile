@@ -9,9 +9,11 @@ VOLUME /downloads
 EXPOSE 6754
 
 #copy app and s6-overlay files
-COPY root/ s6-overlay/ /
+COPY root/ /
 
 # Install permanent packages
+ADD https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz /tmp/
+RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
 RUN apk add --no-cache lighttpd php7-cgi busybox-suid ca-certificates tzdata shadow python2 ffmpeg && \
 # Install temporary build dependencies
 apk add --no-cache --virtual build-dependencies \
